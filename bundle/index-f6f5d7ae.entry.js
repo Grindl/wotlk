@@ -1,0 +1,2 @@
+import"./index-50a990e3.chunk.js";import{aV as s,eA as a}from"./detailed_results-88439820.chunk.js";s.get();const d=new URLSearchParams(window.location.search);d.has("cssClass")&&document.body.classList.add(d.get("cssClass"));d.has("isIndividualSim")&&document.body.classList.add("individual-sim"),document.body.classList.add("new-tab"),new a(document.body);
+//# sourceMappingURL=index-f6f5d7ae.entry.js.map
