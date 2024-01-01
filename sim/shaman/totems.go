@@ -13,7 +13,6 @@ func (shaman *Shaman) newTotemSpellConfig(baseCost float64, spellID int32) core.
 		Flags:    SpellFlagTotem | core.SpellFlagAPL,
 
 		ManaCost: core.ManaCostOptions{
-			FlatCost: baseCost * 100,
 			BaseCost: baseCost,
 			Multiplier: 1 -
 				0.05*float64(shaman.Talents.TotemicFocus),
@@ -38,12 +37,11 @@ func (shaman *Shaman) registerWindfuryTotemSpell() {
 }
 
 func (shaman *Shaman) registerManaSpringTotemSpell() {
-	// TODO
-	// config := shaman.newTotemSpellConfig(0.04, 58774)
-	// config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-	// 	shaman.NextTotemDrops[WaterTotem] = sim.CurrentTime + time.Second*300
-	// }
-	// shaman.ManaSpringTotem = shaman.RegisterSpell(config)
+	config := shaman.newTotemSpellConfig(0.04, 58774)
+	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+		shaman.NextTotemDrops[WaterTotem] = sim.CurrentTime + time.Second*300
+	}
+	shaman.ManaSpringTotem = shaman.RegisterSpell(config)
 }
 
 func (shaman *Shaman) registerHealingStreamTotemSpell() {

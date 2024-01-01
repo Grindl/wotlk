@@ -369,78 +369,80 @@ func (shaman *Shaman) applyFlurry() {
 }
 
 func (shaman *Shaman) applyMaelstromWeapon() {
-	// if shaman.Talents.MaelstromWeapon == 0 {
-	// 	return
-	// }
+	/*
+		if shaman.Talents.MaelstromWeapon == 0 {
+			return
+		}
 
-	// var t10BonusAura *core.Aura
-	// enhT10Bonus := false
-	// if shaman.HasSetBonus(ItemSetFrostWitchBattlegear, 4) {
-	// 	enhT10Bonus = true
+		var t10BonusAura *core.Aura
+		enhT10Bonus := false
+		if shaman.HasSetBonus(ItemSetFrostWitchBattlegear, 4) {
+			enhT10Bonus = true
 
-	// 	statDep := shaman.NewDynamicMultiplyStat(stats.AttackPower, 1.2)
-	// 	t10BonusAura = shaman.RegisterAura(core.Aura{
-	// 		Label:    "Maelstrom Power",
-	// 		ActionID: core.ActionID{SpellID: 70831},
-	// 		Duration: time.Second * 10,
-	// 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-	// 			shaman.EnableDynamicStatDep(sim, statDep)
-	// 		},
-	// 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-	// 			shaman.DisableDynamicStatDep(sim, statDep)
-	// 		},
-	// 	})
-	// }
+			statDep := shaman.NewDynamicMultiplyStat(stats.AttackPower, 1.2)
+			t10BonusAura = shaman.RegisterAura(core.Aura{
+				Label:    "Maelstrom Power",
+				ActionID: core.ActionID{SpellID: 70831},
+				Duration: time.Second * 10,
+				OnGain: func(aura *core.Aura, sim *core.Simulation) {
+					shaman.EnableDynamicStatDep(sim, statDep)
+				},
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					shaman.DisableDynamicStatDep(sim, statDep)
+				},
+			})
+		}
 
-	// // TODO: Don't forget to make it so that AA don't reset when casting when MW is active
-	// // for LB / CL / LvB
-	// // They can't actually hit while casting, but the AA timer doesnt reset if you cast during the AA timer.
+		// TODO: Don't forget to make it so that AA don't reset when casting when MW is active
+		// for LB / CL / LvB
+		// They can't actually hit while casting, but the AA timer doesnt reset if you cast during the AA timer.
 
-	// // For sim purposes maelstrom weapon only impacts CL / LB
-	// shaman.MaelstromWeaponAura = shaman.RegisterAura(core.Aura{
-	// 	Label:     "MaelstromWeapon Proc",
-	// 	ActionID:  core.ActionID{SpellID: 53817},
-	// 	Duration:  time.Second * 30,
-	// 	MaxStacks: 5,
-	// 	OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
-	// 		multDiff := 0.2 * float64(newStacks-oldStacks)
-	// 		shaman.LightningBolt.CastTimeMultiplier -= multDiff
-	// 		shaman.ChainLightning.CastTimeMultiplier -= multDiff
+		// For sim purposes maelstrom weapon only impacts CL / LB
+		shaman.MaelstromWeaponAura = shaman.RegisterAura(core.Aura{
+			Label:     "MaelstromWeapon Proc",
+			ActionID:  core.ActionID{SpellID: 53817},
+			Duration:  time.Second * 30,
+			MaxStacks: 5,
+			OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks int32, newStacks int32) {
+				multDiff := 0.2 * float64(newStacks-oldStacks)
+				shaman.LightningBolt.CastTimeMultiplier -= multDiff
+				shaman.ChainLightning.CastTimeMultiplier -= multDiff
 
-	// 		if enhT10Bonus && shaman.MaelstromWeaponAura.GetStacks() == 5 {
-	// 			if sim.RandomFloat("Maelstrom Power") < 0.15 {
-	// 				t10BonusAura.Activate(sim)
-	// 			}
-	// 		}
-	// 	},
-	// 	OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-	// 		if !spell.Flags.Matches(SpellFlagElectric) {
-	// 			return
-	// 		}
-	// 		shaman.MaelstromWeaponAura.Deactivate(sim)
-	// 	},
-	// })
+				if enhT10Bonus && shaman.MaelstromWeaponAura.GetStacks() == 5 {
+					if sim.RandomFloat("Maelstrom Power") < 0.15 {
+						t10BonusAura.Activate(sim)
+					}
+				}
+			},
+			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if !spell.Flags.Matches(SpellFlagElectric) {
+					return
+				}
+				shaman.MaelstromWeaponAura.Deactivate(sim)
+			},
+		})
 
-	// ppmm := shaman.AutoAttacks.NewPPMManager(core.TernaryFloat64(shaman.HasSetBonus(ItemSetWorldbreakerBattlegear, 4), 2.4, 2.0)*
-	// 	float64(shaman.Talents.MaelstromWeapon), core.ProcMaskMelee)
-	// // This aura is hidden, just applies stacks of the proc aura.
-	// shaman.RegisterAura(core.Aura{
-	// 	Label:    "MaelstromWeapon",
-	// 	Duration: core.NeverExpires,
-	// 	OnReset: func(aura *core.Aura, sim *core.Simulation) {
-	// 		aura.Activate(sim)
-	// 	},
-	// 	OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-	// 		if !result.Landed() {
-	// 			return
-	// 		}
+		ppmm := shaman.AutoAttacks.NewPPMManager(core.TernaryFloat64(shaman.HasSetBonus(ItemSetWorldbreakerBattlegear, 4), 2.4, 2.0)*
+			float64(shaman.Talents.MaelstromWeapon), core.ProcMaskMelee)
+		// This aura is hidden, just applies stacks of the proc aura.
+		shaman.RegisterAura(core.Aura{
+			Label:    "MaelstromWeapon",
+			Duration: core.NeverExpires,
+			OnReset: func(aura *core.Aura, sim *core.Simulation) {
+				aura.Activate(sim)
+			},
+			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				if !result.Landed() {
+					return
+				}
 
-	// 		if ppmm.Proc(sim, spell.ProcMask, "Maelstrom Weapon") {
-	// 			shaman.MaelstromWeaponAura.Activate(sim)
-	// 			shaman.MaelstromWeaponAura.AddStack(sim)
-	// 		}
-	// 	},
-	// })
+				if ppmm.Proc(sim, spell.ProcMask, "Maelstrom Weapon") {
+					shaman.MaelstromWeaponAura.Activate(sim)
+					shaman.MaelstromWeaponAura.AddStack(sim)
+				}
+			},
+		})
+	*/
 }
 
 func (shaman *Shaman) registerManaTideTotemCD() {
