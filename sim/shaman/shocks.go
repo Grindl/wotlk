@@ -23,10 +23,7 @@ func (shaman *Shaman) newShockSpellConfig(spellID int32, spellSchool core.SpellS
 		ManaCost: core.ManaCostOptions{
 			BaseCost: baseCost,
 			Multiplier: 1 -
-				core.TernaryFloat64(shaman.Talents.ShamanisticFocus, 0.45, 0) -
-				0.02*float64(shaman.Talents.Convection) -
-				0.02*float64(shaman.Talents.MentalQuickness) -
-				core.TernaryFloat64(shaman.HasSetBonus(ItemSetSkyshatterHarness, 2), 0.1, 0),
+				0.02*float64(shaman.Talents.Convection),
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -38,7 +35,7 @@ func (shaman *Shaman) newShockSpellConfig(spellID int32, spellSchool core.SpellS
 			},
 		},
 
-		BonusHitRating: float64(shaman.Talents.ElementalPrecision) * core.SpellHitRatingPerHitChance,
+		BonusHitRating: float64(shaman.Talents.NaturesGuidance) * core.SpellHitRatingPerHitChance,
 		DamageMultiplier: 1 +
 			0.01*float64(shaman.Talents.Concussion) +
 			core.TernaryFloat64(shaman.HasSetBonus(ItemSetThrallsBattlegear, 4), 0.25, 0),
@@ -60,9 +57,9 @@ func (shaman *Shaman) registerEarthShockSpell(shockTimer *core.Timer) {
 func (shaman *Shaman) registerFlameShockSpell(shockTimer *core.Timer) {
 	config := shaman.newShockSpellConfig(49233, core.SpellSchoolFire, 0.17, shockTimer)
 
-	config.Cast.CD.Duration -= time.Duration(shaman.Talents.BoomingEchoes) * time.Second
+	// config.Cast.CD.Duration -= time.Duration(shaman.Talents.BoomingEchoes) * time.Second
 	config.CritMultiplier = shaman.ElementalCritMultiplier(0)
-	config.DamageMultiplier += 0.1 * float64(shaman.Talents.BoomingEchoes)
+	// config.DamageMultiplier += 0.1 * float64(shaman.Talents.BoomingEchoes)
 
 	flameShockBaseNumberOfTicks := 6 + core.TernaryInt32(shaman.HasSetBonus(ItemSetThrallsRegalia, 2), 3, 0)
 	config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -75,10 +72,7 @@ func (shaman *Shaman) registerFlameShockSpell(shockTimer *core.Timer) {
 		spell.DealDamage(sim, result)
 	}
 
-	bonusPeriodicDamageMultiplier := 0 +
-		0.2*float64(shaman.Talents.StormEarthAndFire) +
-		core.TernaryFloat64(shaman.HasSetBonus(ItemSetWorldbreakerGarb, 2), 0.2, 0) -
-		0.1*float64(shaman.Talents.BoomingEchoes)
+	bonusPeriodicDamageMultiplier := 0.0
 
 	config.Dot = core.DotConfig{
 		Aura: core.Aura{
@@ -112,8 +106,8 @@ func (shaman *Shaman) registerFlameShockSpell(shockTimer *core.Timer) {
 
 func (shaman *Shaman) registerFrostShockSpell(shockTimer *core.Timer) {
 	config := shaman.newShockSpellConfig(49236, core.SpellSchoolFrost, 0.18, shockTimer)
-	config.Cast.CD.Duration -= time.Duration(shaman.Talents.BoomingEchoes) * time.Second
-	config.DamageMultiplier += 0.1 * float64(shaman.Talents.BoomingEchoes)
+	// config.Cast.CD.Duration -= time.Duration(shaman.Talents.BoomingEchoes) * time.Second
+	// config.DamageMultiplier += 0.1 * float64(shaman.Talents.BoomingEchoes)
 	config.ThreatMultiplier *= 2
 	config.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 		baseDamage := sim.Roll(812, 858) + 0.386*spell.SpellPower()

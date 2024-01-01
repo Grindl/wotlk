@@ -8,7 +8,7 @@ import (
 	"github.com/wowsims/sod/sim/core/stats"
 )
 
-var TalentTreeSizes = [3]int{25, 29, 26}
+var TalentTreeSizes = [3]int{15, 16, 15}
 
 // Start looking to refresh 5 minute totems at 4:55.
 const TotemRefreshTime5M = time.Second * 295
@@ -33,7 +33,7 @@ func NewShaman(character *core.Character, talents string, totems *proto.ShamanTo
 	core.FillTalentsProto(shaman.Talents.ProtoReflect(), talents, TalentTreeSizes)
 	shaman.EnableManaBar()
 
-	if shaman.Totems.Fire == proto.FireTotem_TotemOfWrath && !shaman.Talents.TotemOfWrath {
+	if shaman.Totems.Fire == proto.FireTotem_TotemOfWrath && true {
 		shaman.Totems.Fire = proto.FireTotem_FlametongueTotem
 	}
 
@@ -163,12 +163,12 @@ func (shaman *Shaman) GetCharacter() *core.Character {
 }
 
 func (shaman *Shaman) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
-	switch shaman.Totems.Fire {
-	case proto.FireTotem_TotemOfWrath:
-		raidBuffs.TotemOfWrath = true
-	case proto.FireTotem_FlametongueTotem:
-		raidBuffs.FlametongueTotem = true
-	}
+	// switch shaman.Totems.Fire {
+	// case proto.FireTotem_TotemOfWrath:
+	// 	raidBuffs.TotemOfWrath = true
+	// case proto.FireTotem_FlametongueTotem:
+	// 	raidBuffs.FlametongueTotem = true
+	// }
 
 	switch shaman.Totems.Water {
 	case proto.WaterTotem_ManaSpringTotem:
@@ -178,16 +178,16 @@ func (shaman *Shaman) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 		}
 	}
 
-	switch shaman.Totems.Air {
-	case proto.AirTotem_WrathOfAirTotem:
-		raidBuffs.WrathOfAirTotem = true
-	case proto.AirTotem_WindfuryTotem:
-		wfVal := proto.TristateEffect_TristateEffectRegular
-		if shaman.Talents.ImprovedWindfuryTotem > 0 {
-			wfVal = proto.TristateEffect_TristateEffectImproved
-		}
-		raidBuffs.WindfuryTotem = max(wfVal, raidBuffs.WindfuryTotem)
-	}
+	// switch shaman.Totems.Air {
+	// case proto.AirTotem_WrathOfAirTotem:
+	// 	raidBuffs.WrathOfAirTotem = true
+	// case proto.AirTotem_WindfuryTotem:
+	// 	wfVal := proto.TristateEffect_TristateEffectRegular
+	// 	if shaman.Talents.ImprovedWindfuryTotem > 0 {
+	// 		wfVal = proto.TristateEffect_TristateEffectImproved
+	// 	}
+	// 	raidBuffs.WindfuryTotem = max(wfVal, raidBuffs.WindfuryTotem)
+	// }
 
 	switch shaman.Totems.Earth {
 	case proto.EarthTotem_StrengthOfEarthTotem:
@@ -203,13 +203,13 @@ func (shaman *Shaman) AddRaidBuffs(raidBuffs *proto.RaidBuffs) {
 		))
 	}
 
-	if shaman.Talents.UnleashedRage > 0 {
-		raidBuffs.UnleashedRage = true
-	}
+	// if shaman.Talents.UnleashedRage > 0 {
+	// 	raidBuffs.UnleashedRage = true
+	// }
 
-	if shaman.Talents.ElementalOath > 0 {
-		raidBuffs.ElementalOath = true
-	}
+	// if shaman.Talents.ElementalOath > 0 {
+	// 	raidBuffs.ElementalOath = true
+	// }
 }
 func (shaman *Shaman) AddPartyBuffs(partyBuffs *proto.PartyBuffs) {
 	if shaman.Talents.ManaTideTotem {
@@ -231,7 +231,7 @@ func (shaman *Shaman) Initialize() {
 	shaman.registerLightningBoltSpell()
 	shaman.registerLightningShieldSpell()
 	shaman.registerMagmaTotemSpell()
-	shaman.registerManaSpringTotemSpell()
+	//shaman.registerManaSpringTotemSpell()
 	shaman.registerHealingStreamTotemSpell()
 	shaman.registerSearingTotemSpell()
 	shaman.registerShocks()
@@ -255,9 +255,9 @@ func (shaman *Shaman) Initialize() {
 		shaman.setupProcTrackers()
 	}
 
-	if shaman.Talents.SpiritWeapons {
-		shaman.PseudoStats.ThreatMultiplier -= 0.3
-	}
+	// if shaman.Talents.SpiritWeapons {
+	// 	shaman.PseudoStats.ThreatMultiplier -= 0.3
+	// }
 
 	// Healing stream totem applies a HoT (aura) and so needs to be handled as a pre-pull action
 	// instead of during init/reset.
@@ -276,25 +276,25 @@ func (shaman *Shaman) RegisterHealingSpells() {
 	shaman.registerEarthShieldSpell()
 	shaman.registerChainHealSpell()
 
-	if shaman.Talents.TidalWaves > 0 {
-		shaman.tidalWaveProc = shaman.GetOrRegisterAura(core.Aura{
-			Label:    "Tidal Wave Proc",
-			ActionID: core.ActionID{SpellID: 53390},
-			Duration: core.NeverExpires,
-			OnReset: func(aura *core.Aura, sim *core.Simulation) {
-				aura.Deactivate(sim)
-			},
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				shaman.HealingWave.CastTimeMultiplier *= 0.7
-				shaman.LesserHealingWave.BonusCritRating += core.CritRatingPerCritChance * 25
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				shaman.HealingWave.CastTimeMultiplier /= 0.7
-				shaman.LesserHealingWave.BonusCritRating -= core.CritRatingPerCritChance * 25
-			},
-			MaxStacks: 2,
-		})
-	}
+	// if shaman.Talents.TidalWaves > 0 {
+	// 	shaman.tidalWaveProc = shaman.GetOrRegisterAura(core.Aura{
+	// 		Label:    "Tidal Wave Proc",
+	// 		ActionID: core.ActionID{SpellID: 53390},
+	// 		Duration: core.NeverExpires,
+	// 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
+	// 			aura.Deactivate(sim)
+	// 		},
+	// 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+	// 			shaman.HealingWave.CastTimeMultiplier *= 0.7
+	// 			shaman.LesserHealingWave.BonusCritRating += core.CritRatingPerCritChance * 25
+	// 		},
+	// 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+	// 			shaman.HealingWave.CastTimeMultiplier /= 0.7
+	// 			shaman.LesserHealingWave.BonusCritRating -= core.CritRatingPerCritChance * 25
+	// 		},
+	// 		MaxStacks: 2,
+	// 	})
+	// }
 }
 
 func (shaman *Shaman) Reset(sim *core.Simulation) {
@@ -447,6 +447,6 @@ func (shaman *Shaman) fireElementalCooldownSync(actionID core.ActionID, isPotion
 }
 
 func (shaman *Shaman) ElementalCritMultiplier(secondary float64) float64 {
-	critBonus := 0.2*float64(shaman.Talents.ElementalFury) + secondary
+	critBonus := core.TernaryFloat64(shaman.Talents.ElementalFury, 1.0, 0.0) + secondary
 	return shaman.SpellCritMultiplier(1, critBonus)
 }

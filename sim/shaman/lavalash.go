@@ -18,9 +18,9 @@ const (
 )
 
 func (shaman *Shaman) registerLavaLashSpell() {
-	if !shaman.Talents.LavaLash {
-		return
-	}
+	// if !shaman.Talents.LavaLash {
+	// 	return
+	// }
 
 	flatDamageBonus := core.TernaryFloat64(shaman.Ranged().ID == VentureCoFlameSlicer, 25, 0)
 

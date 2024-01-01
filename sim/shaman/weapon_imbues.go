@@ -141,7 +141,7 @@ func (shaman *Shaman) newFlametongueImbueSpell(weapon *core.Item, isDownranked b
 		SpellSchool: core.SpellSchoolFire,
 		ProcMask:    core.ProcMaskWeaponProc,
 
-		BonusHitRating:   float64(shaman.Talents.ElementalPrecision) * core.SpellHitRatingPerHitChance,
+		BonusHitRating:   float64(shaman.Talents.NaturesGuidance) * core.SpellHitRatingPerHitChance,
 		DamageMultiplier: 1,
 		CritMultiplier:   shaman.ElementalCritMultiplier(0),
 		ThreatMultiplier: 1,
@@ -230,8 +230,8 @@ func (shaman *Shaman) RegisterFlametongueImbue(procMask core.ProcMask, isDownran
 	shaman.RegisterOnItemSwapWithImbue(int32(enchantID), &procMask, aura)
 }
 
-func (shaman *Shaman) FrostbrandDebuffAura(target *core.Unit) *core.Aura {
-	multiplier := 1 + 0.05*float64(shaman.Talents.FrozenPower)
+func (shaman *Shaman) FrostbrandDebuffAura(target *core.Unit, unused int32) *core.Aura {
+	multiplier := 1.0
 	return target.GetOrRegisterAura(core.Aura{
 		Label:    "Frostbrand Attack-" + shaman.Label,
 		ActionID: core.ActionID{SpellID: 58799},
@@ -265,7 +265,7 @@ func (shaman *Shaman) newFrostbrandImbueSpell() *core.Spell {
 		SpellSchool: core.SpellSchoolFrost,
 		ProcMask:    core.ProcMaskEmpty,
 
-		BonusHitRating:   float64(shaman.Talents.ElementalPrecision) * core.SpellHitRatingPerHitChance,
+		BonusHitRating:   float64(shaman.Talents.NaturesGuidance) * core.SpellHitRatingPerHitChance,
 		DamageMultiplier: 1,
 		CritMultiplier:   shaman.ElementalCritMultiplier(0),
 		ThreatMultiplier: 1,

@@ -7,7 +7,7 @@ import (
 )
 
 func (shaman *Shaman) registerFireNovaSpell() {
-	impFireNovaCDReduction := shaman.Talents.ImprovedFireNova * 2
+	impFireNovaCDReduction := shaman.Talents.ImprovedFireTotems * 2
 	fireNovaCooldown := 10 - impFireNovaCDReduction
 
 	shaman.FireNova = shaman.RegisterSpell(core.SpellConfig{
@@ -29,8 +29,8 @@ func (shaman *Shaman) registerFireNovaSpell() {
 			},
 		},
 
-		BonusHitRating:   float64(shaman.Talents.ElementalPrecision) * core.SpellHitRatingPerHitChance,
-		DamageMultiplier: 1 + float64(shaman.Talents.CallOfFlame)*0.05 + float64(shaman.Talents.ImprovedFireNova)*0.1,
+		BonusHitRating:   float64(shaman.Talents.NaturesGuidance) * core.SpellHitRatingPerHitChance,
+		DamageMultiplier: 1 + float64(shaman.Talents.CallOfFlame)*0.05 + float64(shaman.Talents.ImprovedFireTotems)*0.1,
 		CritMultiplier:   shaman.ElementalCritMultiplier(0),
 		ThreatMultiplier: shaman.spellThreatMultiplier(),
 

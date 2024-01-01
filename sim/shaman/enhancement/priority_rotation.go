@@ -56,7 +56,7 @@ func NewPriorityRotation(enh *EnhancementShaman, options *proto.EnhancementShama
 func (rotation *PriorityRotation) buildPriorityRotation(enh *EnhancementShaman) {
 	stormstrikeApplyDebuff := Spell{
 		condition: func(sim *core.Simulation, target *core.Unit) bool {
-			return !enh.StormstrikeDebuffAura(target).IsActive()
+			return !enh.StormstrikeDebuffAura(target, 0).IsActive()
 		},
 		cast: func(sim *core.Simulation, target *core.Unit) bool {
 			return enh.Stormstrike.IsReady(sim) && enh.Stormstrike.Cast(sim, target)

@@ -23,9 +23,9 @@ func (shaman *Shaman) registerAncestralHealingSpell() {
 
 func (shaman *Shaman) registerLesserHealingWaveSpell() {
 	spellCoeff := 0.807
-	bonusCoeff := 0.02 * float64(shaman.Talents.TidalWaves)
-	impShieldChance := 0.2 * float64(shaman.Talents.ImprovedWaterShield)
-	impShieldManaGain := 428.0 * (1 + 0.05*float64(shaman.Talents.ImprovedShields))
+	bonusCoeff := 0.02 * float64(0.0)
+	impShieldChance := 0.2 * float64(0.0)
+	impShieldManaGain := 428.0 * (1 + 0.05*float64(0.0))
 
 	bonusHeal := 0 +
 		core.TernaryFloat64(shaman.Ranged().ID == 42598, 338, 0) +
@@ -68,7 +68,7 @@ func (shaman *Shaman) registerLesserHealingWaveSpell() {
 						shaman.AddMana(sim, impShieldManaGain, shaman.waterShieldManaMetrics)
 					}
 				}
-				if shaman.Talents.AncestralAwakening > 0 {
+				if 0 > 0 {
 					shaman.ancestralHealingAmount = result.Damage * 0.3
 
 					// TODO: this should actually target the lowest health target in the raid.
@@ -87,8 +87,8 @@ func (shaman *Shaman) registerLesserHealingWaveSpell() {
 func (shaman *Shaman) registerRiptideSpell() {
 	spellCoeff := 0.402
 	hotCoeff := 0.188
-	impShieldChance := []float64{0, 0.33, 0.66, 1.0}[shaman.Talents.ImprovedWaterShield]
-	impShieldManaGain := 428.0 * (1 + 0.05*float64(shaman.Talents.ImprovedShields))
+	impShieldChance := []float64{0, 0.33, 0.66, 1.0}[0]
+	impShieldManaGain := 428.0 * (1 + 0.05*float64(0.0))
 
 	shaman.Riptide = shaman.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: 61301},
@@ -145,14 +145,14 @@ func (shaman *Shaman) registerRiptideSpell() {
 						shaman.AddMana(sim, impShieldManaGain, shaman.waterShieldManaMetrics)
 					}
 				}
-				if shaman.Talents.AncestralAwakening > 0 {
+				if 0 > 0 {
 					shaman.ancestralHealingAmount = result.Damage * 0.3
 					// TODO: this should actually target the lowest health target in the raid.
 					//  does it matter in a sim? We currently only simulate tanks taking damage (multiple tanks could be handled here though.)
 					shaman.AncestralAwakening.Cast(sim, target)
 				}
 			}
-			if shaman.Talents.TidalWaves > 0 {
+			if 0.0 > 0 {
 				shaman.tidalWaveProc.Activate(sim)
 				shaman.tidalWaveProc.SetStacks(sim, 2)
 			}
@@ -167,9 +167,9 @@ func (shaman *Shaman) registerHealingWaveSpell() {
 	// -79 mana totem: 39728
 
 	spellCoeff := 0.807
-	bonusCoeff := 0.02 * float64(shaman.Talents.TidalWaves)
-	impShieldChance := 0.2 * float64(shaman.Talents.ImprovedWaterShield)
-	impShieldManaGain := 428.0 * (1 + 0.05*float64(shaman.Talents.ImprovedShields))
+	bonusCoeff := 0.02 * float64(0.0)
+	impShieldChance := 0.2 * float64(0.0)
+	impShieldManaGain := 428.0 * (1 + 0.05*float64(0.0))
 
 	bonusHeal := 0 +
 		core.TernaryFloat64(shaman.Ranged().ID == 42598, 338, 0) +
@@ -212,7 +212,7 @@ func (shaman *Shaman) registerHealingWaveSpell() {
 						shaman.AddMana(sim, impShieldManaGain, shaman.waterShieldManaMetrics)
 					}
 				}
-				if shaman.Talents.AncestralAwakening > 0 {
+				if 0 > 0 {
 					shaman.ancestralHealingAmount = result.Damage * 0.3
 
 					// TODO: this should actually target the lowest health target in the raid.
@@ -250,7 +250,7 @@ func (shaman *Shaman) registerEarthShieldSpell() {
 		},
 
 		BonusCritRating:  float64(shaman.Talents.TidalMastery) * 1 * core.CritRatingPerCritChance,
-		DamageMultiplier: 1 + 0.05*float64(shaman.Talents.ImprovedShields) + 0.05*float64(shaman.Talents.ImprovedEarthShield),
+		DamageMultiplier: 1 + 0.05*float64(0.0) + 0.05*float64(0),
 		ThreatMultiplier: 1,
 		Hot: core.DotConfig{
 			Aura: core.Aura{
@@ -269,7 +269,7 @@ func (shaman *Shaman) registerEarthShieldSpell() {
 				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 				},
 			},
-			NumberOfTicks: 6 + shaman.Talents.ImprovedEarthShield,
+			NumberOfTicks: 6 + 0,
 			TickLength:    time.Minute*10 + 1, // tick length longer than expire time.
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
 				dot.SnapshotBaseDamage = 377 + dot.Spell.HealingPower(target)*spCoeff
@@ -287,8 +287,8 @@ func (shaman *Shaman) registerEarthShieldSpell() {
 
 func (shaman *Shaman) registerChainHealSpell() {
 	spellCoeff := 1.342884
-	impShieldChance := 0.1 * float64(shaman.Talents.ImprovedWaterShield)
-	impShieldManaGain := 428.0 * (1 + 0.05*float64(shaman.Talents.ImprovedShields))
+	impShieldChance := 0.1 * float64(0.0)
+	impShieldManaGain := 428.0 * (1 + 0.05*float64(0.0))
 
 	numHits := min(3, int32(len(shaman.Env.Raid.AllUnits)))
 
@@ -318,7 +318,7 @@ func (shaman *Shaman) registerChainHealSpell() {
 			},
 		},
 		BonusCritRating:  float64(shaman.Talents.TidalMastery) * 1 * core.CritRatingPerCritChance,
-		DamageMultiplier: 1 + .02*float64(shaman.Talents.Purification) + 0.1*float64(shaman.Talents.ImprovedChainHeal),
+		DamageMultiplier: 1 + .02*float64(shaman.Talents.Purification) + 0.1*float64(0),
 		CritMultiplier:   shaman.DefaultHealingCritMultiplier(),
 		ThreatMultiplier: 1 - (float64(shaman.Talents.HealingGrace) * 0.05),
 
@@ -347,7 +347,7 @@ func (shaman *Shaman) registerChainHealSpell() {
 						}
 					}
 				}
-				if shaman.Talents.TidalWaves > 0 {
+				if 0.0 > 0 {
 					shaman.tidalWaveProc.Activate(sim)
 					shaman.tidalWaveProc.SetStacks(sim, 2)
 				}

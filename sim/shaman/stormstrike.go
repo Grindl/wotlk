@@ -11,7 +11,7 @@ var StormstrikeActionID = core.ActionID{SpellID: 17364}
 var TotemOfTheDancingFlame int32 = 45169
 var TotemOfDueling int32 = 40322
 
-func (shaman *Shaman) StormstrikeDebuffAura(target *core.Unit) *core.Aura {
+func (shaman *Shaman) StormstrikeDebuffAura(target *core.Unit, unused int32) *core.Aura {
 	return target.GetOrRegisterAura(core.Aura{
 		Label:     "Stormstrike-" + shaman.Label,
 		ActionID:  StormstrikeActionID,
@@ -87,7 +87,7 @@ func (shaman *Shaman) registerStormstrikeSpell() {
 	manaMetrics := shaman.NewManaMetrics(core.ActionID{SpellID: 51522})
 
 	cooldownTime := time.Duration(core.TernaryFloat64(shaman.HasSetBonus(ItemSetGladiatorsEarthshaker, 4), 6, 8))
-	impSSChance := 0.5 * float64(shaman.Talents.ImprovedStormstrike)
+	impSSChance := 0.0
 
 	shaman.Stormstrike = shaman.RegisterSpell(core.SpellConfig{
 		ActionID:    StormstrikeActionID,

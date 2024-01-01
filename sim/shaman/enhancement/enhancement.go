@@ -62,9 +62,9 @@ func NewEnhancementShaman(character *core.Character, options *proto.Player) *Enh
 
 	enh.ApplySyncType(enhOptions.Options.SyncType)
 
-	if enh.Totems.UseFireElemental && enhOptions.Rotation.EnableItemSwap {
-		enh.EnableItemSwap(enhOptions.Rotation.ItemSwap, enh.DefaultMeleeCritMultiplier(), enh.DefaultMeleeCritMultiplier(), 0)
-	}
+	// if enh.Totems.UseFireElemental && enhOptions.Rotation.EnableItemSwap {
+	// 	enh.EnableItemSwap(enhOptions.Rotation.ItemSwap, enh.DefaultMeleeCritMultiplier(), enh.DefaultMeleeCritMultiplier(), 0)
+	// }
 
 	if enhOptions.Rotation.LightningboltWeave {
 		enh.maelstromWeaponMinStack = enhOptions.Rotation.MaelstromweaponMinStack

@@ -8,9 +8,9 @@ import (
 )
 
 func (shaman *Shaman) registerShamanisticRageCD() {
-	if !shaman.Talents.ShamanisticRage {
-		return
-	}
+	// if !shaman.Talents.ShamanisticRage {
+	// 	return
+	// }
 
 	t10Bonus := false
 	if shaman.HasSetBonus(ItemSetFrostWitchBattlegear, 2) {

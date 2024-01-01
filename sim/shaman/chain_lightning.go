@@ -25,17 +25,17 @@ func (shaman *Shaman) newChainLightningSpell(isLightningOverload bool) *core.Spe
 	if !isLightningOverload {
 		spellConfig.Cast.CD = core.Cooldown{
 			Timer:    shaman.NewTimer(),
-			Duration: time.Second*6 - []time.Duration{0, 750 * time.Millisecond, 1500 * time.Millisecond, 2500 * time.Millisecond}[shaman.Talents.StormEarthAndFire],
+			Duration: time.Second * 6,
 		}
 	}
 
 	numHits := min(3, shaman.Env.GetNumTargets())
 	dmgReductionPerBounce := core.TernaryFloat64(shaman.HasSetBonus(ItemSetTidefury, 2), 0.83, 0.7)
 	dmgBonus := shaman.electricSpellBonusDamage(0.5714)
-	spellCoeff := 0.5714 + 0.04*float64(shaman.Talents.Shamanism)
+	spellCoeff := 0.5714
 
-	canLO := !isLightningOverload && shaman.Talents.LightningOverload > 0
-	lightningOverloadChance := float64(shaman.Talents.LightningOverload) * 0.11 / 3
+	canLO := false
+	lightningOverloadChance := float64(0)
 
 	spellConfig.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 		bounceCoeff := 1.0
