@@ -10,6 +10,7 @@ func (shaman *Shaman) ShockCD() time.Duration {
 	return time.Second*6 - time.Millisecond*200*time.Duration(shaman.Talents.Reverberation)
 }
 
+// TODO SHAMAN-ENH
 // Shared logic for all shocks.
 func (shaman *Shaman) newShockSpellConfig(spellID int32, spellSchool core.SpellSchool, baseCost float64, shockTimer *core.Timer) core.SpellConfig {
 	actionID := core.ActionID{SpellID: spellID}

@@ -6,6 +6,7 @@ import (
 	"github.com/wowsims/sod/sim/core"
 )
 
+// TODO SHAMAN-ELE
 func (shaman *Shaman) registerLightningBoltSpell() {
 	shaman.LightningBolt = shaman.RegisterSpell(shaman.newLightningBoltSpellConfig(false))
 	shaman.LightningBoltLO = shaman.RegisterSpell(shaman.newLightningBoltSpellConfig(true))

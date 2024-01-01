@@ -10,6 +10,7 @@ import (
 var TotemOfTheAstralWinds int32 = 27815
 var TotemOfSplintering int32 = 40710
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) RegisterOnItemSwapWithImbue(effectID int32, procMask *core.ProcMask, aura *core.Aura) {
 	shaman.RegisterOnItemSwap(func(sim *core.Simulation) {
 		mask := core.ProcMaskUnknown

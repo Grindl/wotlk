@@ -1,5 +1,6 @@
 package shaman
 
 func (shaman *Shaman) ApplyRunes() {
-	//TODO
+	//TODO SHAMAN-ENH
+	//TODO SHAMAN-ELE
 }

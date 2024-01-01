@@ -6,6 +6,7 @@ import (
 	"github.com/wowsims/sod/sim/core"
 )
 
+// TODO SHAMAN-P2 preserved in case this becomes a rune in a later phase
 func (fireElemental *FireElemental) registerFireBlast() {
 	fireElemental.FireBlast = fireElemental.RegisterSpell(core.SpellConfig{
 		ActionID:    core.ActionID{SpellID: 13339},

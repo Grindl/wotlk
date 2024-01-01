@@ -6,6 +6,7 @@ import (
 	"github.com/wowsims/sod/sim/core"
 )
 
+// TODO SHAMAN-ELE
 func (shaman *Shaman) registerChainLightningSpell() {
 	numHits := min(3, shaman.Env.GetNumTargets())
 	shaman.ChainLightning = shaman.newChainLightningSpell(false)

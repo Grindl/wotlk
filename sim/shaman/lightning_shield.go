@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/sod/sim/core/proto"
 )
 
+// TODO SHAMAN-WARDEN
 func (shaman *Shaman) registerLightningShieldSpell() {
 	if shaman.SelfBuffs.Shield != proto.ShamanShield_LightningShield {
 		return

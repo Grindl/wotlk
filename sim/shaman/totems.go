@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/sod/sim/core/proto"
 )
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) newTotemSpellConfig(baseCost float64, spellID int32) core.SpellConfig {
 	return core.SpellConfig{
 		ActionID: core.ActionID{SpellID: spellID},
@@ -20,6 +21,7 @@ func (shaman *Shaman) newTotemSpellConfig(baseCost float64, spellID int32) core.
 	}
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerWrathOfAirTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.11, 3738)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -28,6 +30,7 @@ func (shaman *Shaman) registerWrathOfAirTotemSpell() {
 	shaman.WrathOfAirTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerWindfuryTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.11, 8512)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -36,6 +39,7 @@ func (shaman *Shaman) registerWindfuryTotemSpell() {
 	shaman.WindfuryTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerManaSpringTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.04, 58774)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -44,6 +48,7 @@ func (shaman *Shaman) registerManaSpringTotemSpell() {
 	shaman.ManaSpringTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-RESTO
 func (shaman *Shaman) registerHealingStreamTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.03, 58757)
 	hsHeal := shaman.RegisterSpell(core.SpellConfig{
@@ -79,6 +84,7 @@ func (shaman *Shaman) registerHealingStreamTotemSpell() {
 	shaman.HealingStreamTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerTotemOfWrathSpell() {
 	config := shaman.newTotemSpellConfig(0.05, 57722)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -88,6 +94,7 @@ func (shaman *Shaman) registerTotemOfWrathSpell() {
 	shaman.TotemOfWrath = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) applyToWDebuff(sim *core.Simulation) {
 	// for _, target := range sim.Encounter.TargetUnits {
 	// 	auraDef := core.TotemOfWrathDebuff(target)
@@ -95,6 +102,7 @@ func (shaman *Shaman) applyToWDebuff(sim *core.Simulation) {
 	// }
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerFlametongueTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.11, 58656)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -103,6 +111,7 @@ func (shaman *Shaman) registerFlametongueTotemSpell() {
 	shaman.FlametongueTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) registerStrengthOfEarthTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.1, 58643)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -111,6 +120,7 @@ func (shaman *Shaman) registerStrengthOfEarthTotemSpell() {
 	shaman.StrengthOfEarthTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerTremorTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.02, 8143)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -119,6 +129,7 @@ func (shaman *Shaman) registerTremorTotemSpell() {
 	shaman.TremorTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-WARDEN
 func (shaman *Shaman) registerStoneskinTotemSpell() {
 	config := shaman.newTotemSpellConfig(0.1, 58753)
 	config.ApplyEffects = func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
@@ -127,6 +138,7 @@ func (shaman *Shaman) registerStoneskinTotemSpell() {
 	shaman.StoneskinTotem = shaman.RegisterSpell(config)
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) registerCallOfTheElements() {
 	airTotem := shaman.getAirTotemSpell(shaman.Totems.Air)
 	earthTotem := shaman.getEarthTotemSpell(shaman.Totems.Earth)
@@ -227,6 +239,7 @@ func (shaman *Shaman) TryDropTotems(sim *core.Simulation) bool {
 	return casted
 }
 
+// TODO SHAMAN-P2
 func (shaman *Shaman) getAirTotemSpell(totemType proto.AirTotem) *core.Spell {
 	switch totemType {
 	case proto.AirTotem_WrathOfAirTotem:
@@ -237,6 +250,7 @@ func (shaman *Shaman) getAirTotemSpell(totemType proto.AirTotem) *core.Spell {
 	return nil
 }
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) getEarthTotemSpell(totemType proto.EarthTotem) *core.Spell {
 	switch totemType {
 	case proto.EarthTotem_StrengthOfEarthTotem:
@@ -249,6 +263,7 @@ func (shaman *Shaman) getEarthTotemSpell(totemType proto.EarthTotem) *core.Spell
 	return nil
 }
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) getFireTotemSpell(totemType proto.FireTotem) *core.Spell {
 	switch totemType {
 	case proto.FireTotem_TotemOfWrath:
@@ -263,6 +278,7 @@ func (shaman *Shaman) getFireTotemSpell(totemType proto.FireTotem) *core.Spell {
 	return nil
 }
 
+// TODO SHAMAN-RESTO
 func (shaman *Shaman) getWaterTotemSpell(totemType proto.WaterTotem) *core.Spell {
 	switch totemType {
 	case proto.WaterTotem_ManaSpringTotem:

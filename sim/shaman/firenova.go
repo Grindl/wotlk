@@ -6,6 +6,7 @@ import (
 	"github.com/wowsims/sod/sim/core"
 )
 
+// TODO SHAMAN-ENH AOE
 func (shaman *Shaman) registerFireNovaSpell() {
 	impFireNovaCDReduction := shaman.Talents.ImprovedFireTotems * 2
 	fireNovaCooldown := 10 - impFireNovaCDReduction

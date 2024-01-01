@@ -9,6 +9,7 @@ import (
 
 const fireTotemDuration time.Duration = time.Second * 120
 
+// TODO SHAMAN-P2 preserved in case this becomes a rune in a later phase
 func (shaman *Shaman) registerFireElementalTotem() {
 	if !shaman.Totems.UseFireElemental && !shaman.IsUsingAPL {
 		return

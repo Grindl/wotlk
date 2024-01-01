@@ -6,6 +6,7 @@ import (
 	"github.com/wowsims/sod/sim/core"
 )
 
+// TODO SHAMAN-RESTO
 func (shaman *Shaman) registerAncestralHealingSpell() {
 	shaman.AncestralAwakening = shaman.RegisterSpell(core.SpellConfig{
 		ActionID:         core.ActionID{SpellID: 52752},

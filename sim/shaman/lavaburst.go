@@ -6,6 +6,7 @@ import (
 	"github.com/wowsims/sod/sim/core"
 )
 
+// TODO SHAMAN-ELE
 func (shaman *Shaman) registerLavaBurstSpell() {
 	actionID := core.ActionID{SpellID: 60043}
 	dmgBonus := core.TernaryFloat64(shaman.Ranged().ID == VentureCoLightningRod, 121, 0) +

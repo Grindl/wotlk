@@ -9,6 +9,7 @@ import (
 	"github.com/wowsims/sod/sim/core/stats"
 )
 
+// TODO SHAMAN-P2 preserved in case this becomes a rune in a later phase
 type SpiritWolf struct {
 	core.Pet
 

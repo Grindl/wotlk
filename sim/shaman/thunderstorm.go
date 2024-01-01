@@ -1,5 +1,6 @@
 package shaman
 
+// TODO SHAMAN-P2 preserved in case this becomes a rune in a later phase
 func (shaman *Shaman) registerThunderstormSpell() {
 	/* if !shaman.Talents.Thunderstorm {
 		return

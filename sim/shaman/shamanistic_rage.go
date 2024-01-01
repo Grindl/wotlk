@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/sod/sim/core/stats"
 )
 
+// TODO SHAMAN-ENH for mana regen
 func (shaman *Shaman) registerShamanisticRageCD() {
 	// if !shaman.Talents.ShamanisticRage {
 	// 	return

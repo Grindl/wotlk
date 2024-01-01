@@ -11,6 +11,7 @@ func (shaman *Shaman) BloodlustActionID() core.ActionID {
 	}
 }
 
+// TODO SHAMAN-P2 preserved in case this becomes a rune in a later phase
 func (shaman *Shaman) registerBloodlustCD() {
 	/* if !shaman.SelfBuffs.Bloodlust && !shaman.IsUsingAPL {
 		return

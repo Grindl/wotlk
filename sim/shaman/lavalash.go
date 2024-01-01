@@ -17,6 +17,7 @@ const (
 	WrathfulGladiatorsTotemOfIndomitability   = 51507
 )
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) registerLavaLashSpell() {
 	// if !shaman.Talents.LavaLash {
 	// 	return

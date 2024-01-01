@@ -11,6 +11,7 @@ var StormstrikeActionID = core.ActionID{SpellID: 17364}
 var TotemOfTheDancingFlame int32 = 45169
 var TotemOfDueling int32 = 40322
 
+// TODO SHAMAN-P2 No stormstrike in P1
 func (shaman *Shaman) StormstrikeDebuffAura(target *core.Unit, unused int32) *core.Aura {
 	return target.GetOrRegisterAura(core.Aura{
 		Label:     "Stormstrike-" + shaman.Label,

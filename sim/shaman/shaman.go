@@ -231,7 +231,7 @@ func (shaman *Shaman) Initialize() {
 	shaman.registerLightningBoltSpell()
 	shaman.registerLightningShieldSpell()
 	shaman.registerMagmaTotemSpell()
-	//shaman.registerManaSpringTotemSpell()
+	shaman.registerManaSpringTotemSpell()
 	shaman.registerHealingStreamTotemSpell()
 	shaman.registerSearingTotemSpell()
 	shaman.registerShocks()

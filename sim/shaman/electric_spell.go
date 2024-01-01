@@ -23,6 +23,7 @@ const (
 	CastTagLightningOverload int32 = 6
 )
 
+// TODO SHAMAN-ELE
 // Shared precomputation logic for LB and CL.
 func (shaman *Shaman) newElectricSpellConfig(actionID core.ActionID, baseCost float64, baseCastTime time.Duration, isLightningOverload bool) core.SpellConfig {
 	mask := core.ProcMaskSpellDamage

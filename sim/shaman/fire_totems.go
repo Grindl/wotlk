@@ -7,6 +7,7 @@ import (
 	"github.com/wowsims/sod/sim/core/proto"
 )
 
+// TODO SHAMAN-ENH
 func (shaman *Shaman) registerSearingTotemSpell() {
 	var extraCastCondition core.CanCastCondition
 	if !shaman.IsUsingAPL && shaman.Totems.Fire == proto.FireTotem_SearingTotem && shaman.Totems.UseFireMcd {
